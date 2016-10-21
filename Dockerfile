@@ -1,12 +1,8 @@
-FROM debian:jessie
-MAINTAINER Adrian Dvergsdal [atmoz.net]
-
+FROM centos:7
 # - Install packages
 # - OpenSSH needs /var/run/sshd to run
 # - Remove generic host keys, entrypoint generates unique keys
-RUN apt-get update && \
-    apt-get -y install openssh-server && \
-    rm -rf /var/lib/apt/lists/* && \
+RUN yum -y install wget openssh-server; yum clean all && \
     mkdir -p /var/run/sshd && \
     rm -f /etc/ssh/ssh_host_*key*
 
